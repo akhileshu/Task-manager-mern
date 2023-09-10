@@ -44,15 +44,15 @@ app.use(cookieParser());
 // routes
 
 app.use("/auth", authRoute);
-app.use("/task", taskRoute);
-app.use("/user", userRoute);
-app.use(
-  "/protected",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.send("you are authenticated");
-  }
-);
+app.use("/task",passport.authenticate("jwt", { session: false }), taskRoute);
+app.use("/user",passport.authenticate("jwt", { session: false }), userRoute);
+// app.use(
+//   "/protected",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     res.send("you are authenticated");
+//   }
+// );
 
 // Catch-all route to serve the React app's HTML
 // works when user refreshes and lands on the same page
