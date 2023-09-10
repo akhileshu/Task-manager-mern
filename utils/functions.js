@@ -20,3 +20,11 @@ const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000; // One week in millisecon
 
 export const expirationDate = new Date(Date.now() + oneWeekInMilliseconds);
 
+// Function to calculate the current IST datetime
+export const getCurrentISTDateTime = () => {
+  const nowIST = new Date();
+  nowIST.setHours(nowIST.getHours() + 5); // Add 5 hours for IST
+  nowIST.setMinutes(nowIST.getMinutes() + 30); // Add 30 minutes for IST
+  return nowIST;
+};
+

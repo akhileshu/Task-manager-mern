@@ -1,5 +1,5 @@
 import Task from "../models/task.js";
-import { getTimeStamp } from "../utils/functions.js";
+import { getCurrentISTDateTime, getTimeStamp } from "../utils/functions.js";
 import mongoose from "mongoose";
 
 export const createTask = async (req, res) => {
@@ -25,11 +25,11 @@ export const deleteTask = async (req, res) => {
 export const updateTask = async (req, res) => {
   let { _id } = req.body; // Extracting Id from req.body
 
-
   try {
+    
     const task = await Task.findByIdAndUpdate(
       _id,
-      { ...req.body, lastUpdate: Date.now() },
+      { ...req.body, lastUpdate: getCurrentISTDateTime() },
       {
         new: true, //return updated product
       }

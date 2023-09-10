@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { getCurrentISTDateTime } from '../utils/functions.js';
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
@@ -15,7 +16,7 @@ const taskSchema = new Schema({
   },
   creationDate: {
     type: Date,
-    default: Date.now,
+    default: getCurrentISTDateTime,
   },
   lastUpdate:{
     type: Date
