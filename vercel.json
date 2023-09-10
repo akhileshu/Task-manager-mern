@@ -11,6 +11,14 @@
   ],
   "routes": [
     {
+      "src": "/",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.+)",
+      "dest": "server.js"
+    },
+    {
       "src": "/auth",
       "dest": "server.js"
     },
