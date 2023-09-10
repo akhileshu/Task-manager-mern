@@ -29,7 +29,7 @@ export const updateTask = async (req, res) => {
     
     const task = await Task.findByIdAndUpdate(
       _id,
-      { ...req.body, lastUpdate: getCurrentISTDateTime() },
+      { ...req.body, lastUpdate: new Date() },
       {
         new: true, //return updated product
       }
