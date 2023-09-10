@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT || 8080,'0.0.0.0', () =>
+app.listen(process.env.PORT || 8080, () =>
   console.log("server started on port 8000")
 );
 // '0.0.0.0'->Configure Express to Listen on All Network Interfaces:
