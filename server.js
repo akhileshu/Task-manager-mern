@@ -28,6 +28,9 @@ app.use(passport.initialize()); // Initialize Passport
 // middlewares
 const corsOptions = {
   origin: [
+    "https://task-manager-git-main-akhileshu.vercel.app",
+    "https://task-manager-qenqfypch-akhileshu.vercel.app",
+    "https://task-manager-mu-two.vercel.app",
     "http://localhost:3000",//for react
     "http://localhost:8000",//for api
     "http://example.com", // Add additional origins here
