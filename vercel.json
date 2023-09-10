@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "index.js",
+      "src": "server.js",
       "use": "@vercel/node"
     },
     {
@@ -11,41 +11,30 @@
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "index.js"
+      "src": "/auth",
+      "dest": "server.js"
     },
     {
-      "src": "/login",
-      "dest": "index.js"
+      "src": "/auth/(.+)",
+      "dest": "server.js"
     },
     {
-      "src": "/signup",
-      "dest": "index.js"
+      "src": "/task",
+      "dest": "server.js"
     },
     {
-      "src": "/tasks",
-      "dest": "index.js"
+      "src": "/task/(.+)",
+      "dest": "server.js"
     },
     {
-      "src": "/newTask",
-      "dest": "index.js"
+      "src": "/user",
+      "dest": "server.js"
     },
     {
-      "src": "/profile",
-      "dest": "index.js"
+      "src": "/user/(.+)",
+      "dest": "server.js"
     },
-    {
-      "src": "/developer",
-      "dest": "index.js"
-    },
-    {
-      "src": "/contactUs",
-      "dest": "index.js"
-    },
-    {
-      "src": "/about",
-      "dest": "index.js"
-    },
+
     
     {
       "src": "/",
