@@ -16,7 +16,7 @@ const taskSchema = new Schema({
   },
   creationDate: {
     type: Date,
-    default: new Date,
+    default:()=> new Date(),
   },
   lastUpdate:{
     type: Date
