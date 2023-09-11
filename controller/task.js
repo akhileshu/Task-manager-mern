@@ -5,7 +5,12 @@ import mongoose from "mongoose";
 export const createTask = async (req, res) => {
   try {
     // Parse the datetime-local string into a JavaScript Date object
-    const task = new Task({...req.body,dueDate:new Date(req.body.dueDate)});
+    // const task = new Task({...req.body,dueDate:new Date(req.body.dueDate)});
+    const task = new Task({
+      ...req.body,
+      dueDate: new Date(req.body.dueDate).getTime() - 5.5 * 60 * 60 * 1000, // Subtract 5.5 hours in milliseconds
+    });
+
     const doc = await task.save();
 
     res.status(201).json(doc);
@@ -27,11 +32,16 @@ export const updateTask = async (req, res) => {
   let { _id } = req.body; // Extracting Id from req.body
 
   try {
-        // Parse the datetime-local string into a JavaScript Date object
+    // Parse the datetime-local string into a JavaScript Date object
 
     const task = await Task.findByIdAndUpdate(
       _id,
-      { ...req.body, lastUpdate: Date.now(),dueDate:new Date(req.body.dueDate) },
+      {
+        ...req.body,
+        lastUpdate: Date.now(),
+        dueDate: new Date(req.body.dueDate).getTime() - 5.5 * 60 * 60 * 1000, // Subtract 5.5 hours in milliseconds
+
+      },
       {
         new: true, //return updated product
       }
@@ -42,7 +52,7 @@ export const updateTask = async (req, res) => {
     }
     res.status(200).json(task);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(400).json({ error: "Error updating task" });
   }
 };
@@ -53,7 +63,7 @@ export const fetchAllTasks = async (req, res) => {
   // order is important
   // console.log('hi',req.query.status)
   let query, totalTasksQuery;
-  // const {_id}=req.user //i am fetching by user id 
+  // const {_id}=req.user //i am fetching by user id
   if (req.params.id) {
     query = Task.find({ userId: req.params.id });
     totalTasksQuery = Task.find({ userId: req.params.id });
@@ -90,7 +100,7 @@ export const fetchAllTasks = async (req, res) => {
     // console.log({ docslength }); //i can send in json or set as header
     const docs = await query.exec();
     // if(!docs)res.status(404).json({ message: "no tasks to fetch" });
-    res.header("X-Total-Results", docslength).status(200).json({docs});
+    res.header("X-Total-Results", docslength).status(200).json({ docs });
   } catch (error) {
     res.status(400).json({ error: "Error fetching tasks by filter" });
   }
