@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
-import { getCurrentISTDateTime } from '../utils/functions.js';
+import mongoose from "mongoose";
+import { getCurrentISTDateTime } from "../utils/functions.js";
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
-  userId: { type: mongoose.ObjectId ,required: true},
+  userId: { type: mongoose.ObjectId, required: true },
   title: {
     type: String,
     required: true,
@@ -16,14 +16,14 @@ const taskSchema = new Schema({
   },
   creationDate: {
     type: Date,
-    default:()=> new Date(),
+    default: Date.now,
   },
-  lastUpdate:{
-    type: Date
+  lastUpdate: {
+    type: Date,
   },
   dueDate: {
     type: Date,
-    required: true, 
+    required: true,
   },
   status: {
     type: String,
@@ -35,6 +35,5 @@ const taskSchema = new Schema({
 });
 
 const Task = mongoose.model("Task", taskSchema);
-
 
 export default Task;

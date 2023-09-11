@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 
 export const createTask = async (req, res) => {
   try {
-    const task = new Task(req.body);
+    // Parse the datetime-local string into a JavaScript Date object
+    const task = new Task({...req.body,dueDate:new Date(req.body.dueDate)});
     const doc = await task.save();
 
     res.status(201).json(doc);
@@ -26,10 +27,11 @@ export const updateTask = async (req, res) => {
   let { _id } = req.body; // Extracting Id from req.body
 
   try {
-    
+        // Parse the datetime-local string into a JavaScript Date object
+
     const task = await Task.findByIdAndUpdate(
       _id,
-      { ...req.body, lastUpdate: new Date() },
+      { ...req.body, lastUpdate: Date.now(),dueDate:new Date(req.body.dueDate) },
       {
         new: true, //return updated product
       }
